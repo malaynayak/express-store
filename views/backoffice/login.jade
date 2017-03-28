@@ -1,0 +1,25 @@
+doctype html
+html
+	head
+		include layout/header
+	body(class="skin-blue fixed")
+		section.content.content-wrapper
+			div.row
+				div.col-md-4.col-md-offset-4
+					div.box.box-danger
+						div.box-header
+							h3.box-title 
+								i.fa.fa-key
+								span Login
+						div.box-body
+							form(id="login_form",action="/backoffice/login",method="POST")
+								div.form-group
+									label Username
+									input(name="username",type="text",class="form-control")
+								div.form-group
+									label Password
+									input(name="password",type="password",class="form-control")
+								div.form-group
+									button(type="submit",class="btn btn-primary") Submit
+
+		include layout/scripts
