@@ -1,0 +1,21 @@
+{
+  "name": "express-store",
+  "description": "Express Store",
+  "main": "",
+  "authors": [
+    "Malay Nayak <malayakanta.nayak@kelltontech.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/malaynayak/express-store",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#^2.3.11"
+  }
+}
