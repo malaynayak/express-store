@@ -1,0 +1,24 @@
+if typeof errors!='undefined' && errors
+	div(class="alert alert-danger", role="alert")
+		i(class="fa fa-exclamation",aria-hidden="true") 
+		span &nbsp;&nbsp;Fix the follwing error(s)
+		ul
+		each error in errors
+			li= error.message
+form(method="POST")
+	div.form-group
+		label Key
+		input(type="text",class="form-control",name="key",id="key",value=(typeof brand!='undefined')? brand.key:"")
+	div.form-group
+		label Title
+		input(type="text",class="form-control",name="title",id="title",value=(typeof brand!='undefined')? brand.title:"")
+	div.checkbox
+		label
+			if typeof brand!='undefined' && brand.status
+				input(type="checkbox",checked,name="status")
+			else
+				input(type="checkbox",name="status",id="status")
+			span Active?
+	button(class="btn btn-success",type="submit") Save
+	&nbsp;&nbsp;
+	a(class="btn btn-danger",href="/backoffice/brand") Cancel

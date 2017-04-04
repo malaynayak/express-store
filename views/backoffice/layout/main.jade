@@ -3,5 +3,27 @@ html
 	head
 		include header
 	body(class="skin-blue fixed sidebar-mini")
-		block content
+		div.wrapper
+			header.main-header
+				a(href="/backoffice",class="logo")
+					span.logo-mini	SM
+					span.logo-lg	Store Manager
+				nav(class="navbar navbar-static-top")
+					//Sidebar toggle button
+					a(href="#",class="sidebar-toggle",data-toggle="offcanvas",
+					role="button")
+						span.sr-only Toggle navigation
+					//Navbar Right Menu
+					div.navbar-custom-menu
+						ul.nav.navbar-nav
+							li.dropdown.user.user-menu
+								a(href="/backoffice/logout") Logout
+		aside.main-sidebar
+			//Sidebar
+			section.sidebar
+				include sidebar
+		div.content-wrapper
+			block content
+		footer.main-footer
+			strore Store Manager
 		include scripts

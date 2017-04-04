@@ -18,7 +18,7 @@ mongoose.connect(connectionString);
 
 
 var index = require('./routes/index');
-var backoffice = require('./routes/backoffice');
+var backoffice = require('./routes/backoffice/index');
 
 var app = express();
 

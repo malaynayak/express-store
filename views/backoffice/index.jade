@@ -1,44 +1,9 @@
 extends layout/main
 block content
-	div.wrapper
-		header.main-header
-			a(href="/backoffice",class="logo")
-				span.logo-mini	BO
-				span.logo-lg	Store Back Office
-			nav(class="navbar navbar-static-top")
-				//Sidebar toggle button
-				a(href="#",class="sidebar-toggle",data-toggle="offcanvas",
-				role="button")
-					span.sr-only Toggle navigation
-				//Navbar Right Menu
-				div.navbar-custom-menu
-					ul.nav.navbar-nav
-						li.dropdown.user.user-menu
-							a(href="/backoffice/logout") Logout
-		aside.main-sidebar
-			//Sidebar
-			section.sidebar
-				ul.sidebar-menu
-					li.header MANAGE STORE
-					li.active
-						a(href="#")
-							i.fa.fa-circle-o.text-red
-							span Categories
-					li
-						a(href="#")
-							i.fa.fa-circle-o.text-yellow
-							span Brands
-					li
-						a(href="#")
-							i.fa.fa-circle-o.text-aqua
-							span Products
-		div.content-wrapper
-			section.content-header
-				h1 Dashboard
-			section.content
-				p Welcome
-				p= user
-		footer.main-footer
-			strore Store Manager
+	section.content-header
+		h1 Dashboard
+	section.content
+		p Welcome
+		p= user
 
 

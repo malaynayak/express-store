@@ -1,14 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
-
-//Authorization Middleware
-var auth = function(req, res, next) {
-  if (req.session && req.session.user && req.session.user.role === "Admin")
-    return next();
-  else
-    res.redirect('/backoffice/login');
-};
+var User = require('../../models/user');
+var tools = require('./tools');
 
 /* Admin Login */
 router.route('/login').get(function(req, res, next) {
@@ -44,14 +37,19 @@ router.route('/login').post(function(req, res) {
 });
 
 //Logout
-router.route('/logout').get(auth, function (req, res) {
+router.route('/logout').get(tools.authenticate, function (req, res) {
   req.session.destroy();
   res.redirect('/backoffice/login');
 });
 
 /* Dashboard */
-router.route('/').get(auth, function(req, res) {
+router.route('/').get(tools.authenticate, function(req, res) {
   res.render('backoffice/index', { title: 'Back Office'});
 });
+
+/* Category Routes */
+router.use('/', require('./category'));
+/* Brand Routes  */
+router.use('/', require('./brand'));
 
 module.exports = router;

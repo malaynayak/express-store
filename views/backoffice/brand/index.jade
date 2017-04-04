@@ -1,0 +1,51 @@
+extends ../layout/main
+block content
+	section.content-header
+		h1 Product Brands
+	section.content
+		div.row
+			div.col-md-12
+				div.box.box-default
+					div.box-header
+						a(href="/backoffice/brand/add",class="btn btn-success")
+							i.fa.fa-plus
+							span &nbsp;&nbsp;Add Brand
+						div.box-tools
+							form
+								div(class="input-group input-group-sm",style="width:150px")
+									input(type="text",name="search",class="form-control pull-right",placeholder="Search",value=(search))
+									div.input-group-btn
+										button(type="submit",class="btn btn-default")
+											i.fa.fa-search
+					div.box-body
+						table(class="table table-bordered")
+							tbody
+								thead
+									tr
+										th Key
+										th Title
+										th Status
+										th
+								each item in brands
+									tr
+										td= item.key
+										td= item.title
+										td 
+											if item.status == true
+												span.label.label-success Active
+											else 
+												span.label.label-danger Disabled
+										td
+											a(href="/backoffice/brand/update/#{item.key}",title="Edit",class=" margin-r-5")
+												i.fa.fa-pencil
+											a(href="/backoffice/brand/delete/#{item.key}",title="Delete",class=" margin-r-5 confirm-delete")
+												i.fa.fa-trash
+					div.box-footer.clearfix
+						if pages > 1
+							ul.pagination.no-margin.pull-right
+								- for (var i = 1; i <= pages; i++)
+									li(class=(pageNo == i) ? "active" : "")
+										if (search === "")
+											a(href="?page=#{i}")= i
+										else
+											a(href="?search=#{search}&page=#{i}")= i
