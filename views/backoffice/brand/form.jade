@@ -1,14 +1,12 @@
 if typeof errors!='undefined' && errors
 	div(class="alert alert-danger", role="alert")
+		button(type="button",class="close",data-dismiss="alert",aria-hidden="true") ×
 		i(class="fa fa-exclamation",aria-hidden="true") 
 		span &nbsp;&nbsp;Fix the follwing error(s)
 		ul
 		each error in errors
 			li= error.message
 form(method="POST")
-	div.form-group
-		label Key
-		input(type="text",class="form-control",name="key",id="key",value=(typeof brand!='undefined')? brand.key:"")
 	div.form-group
 		label Title
 		input(type="text",class="form-control",name="title",id="title",value=(typeof brand!='undefined')? brand.title:"")

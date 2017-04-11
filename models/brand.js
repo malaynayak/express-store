@@ -10,7 +10,6 @@ var brandSchema = new Schema({
   },
   key: {
     type: String,
-    required: [true, "Key is required"],
     maxlength: [20, "Key should not exceed 20 letters"],
     unique: true
   },
@@ -20,12 +19,21 @@ var brandSchema = new Schema({
   }
 });
 
+/**
+ * Pre-save hook
+ */
+brandSchema.pre('save', function (next) {
+  var title = this.title;
+  this.key = title.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();
+  next();
+});
+
 // the below validations only apply if you are signing up traditionally
 brandSchema.path('key').validate(function (key, fn) {
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('key')) {
-    this.model('Brand').find({ key: key }).exec(function (err, categories) {
-      fn(!err && categories.length === 0);
+    this.model('Brand').find({ key: key }).exec(function (err, brands) {
+      fn(!err && brands.length === 0);
     });
   } else fn(true);
 }, 'Key already exists');
@@ -34,8 +42,8 @@ brandSchema.path('key').validate(function (key, fn) {
 brandSchema.path('title').validate(function (title, fn) {
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('title')) {
-    this.model('Brand').find({ title: title }).exec(function (err, categories) {
-      fn(!err && categories.length === 0);
+    this.model('Brand').find({ title: title }).exec(function (err, brands) {
+      fn(!err && brands.length === 0);
     });
   } else fn(true);
 }, 'Title already exists');

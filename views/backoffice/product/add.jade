@@ -1,0 +1,15 @@
+extends ../layout/main
+block content
+	section.content-header
+		h1 Add Product
+	section.content
+		div.row
+			div.col-md-12
+				div.nav-tabs-custom
+					ul.nav.nav-tabs
+						li.active
+							a(href="#") Info
+						li
+							a(href="#") Image
+					div.tab-content
+						include form

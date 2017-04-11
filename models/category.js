@@ -10,7 +10,6 @@ var categorySchema = new Schema({
   },
   key: {
     type: String,
-    required: [true, "Key is required"],
     maxlength: [20, "Key should not exceed 20 letters"],
     unique: true
   },
@@ -18,6 +17,15 @@ var categorySchema = new Schema({
     type: Boolean,
     default: 'true'
   }
+});
+
+/**
+ * Pre-save hook
+ */
+categorySchema.pre('save', function (next) {
+  var title = this.title;
+  this.key = title.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();
+  next();
 });
 
 // the below validations only apply if you are signing up traditionally

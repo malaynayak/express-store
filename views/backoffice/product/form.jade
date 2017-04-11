@@ -1,0 +1,45 @@
+if typeof errors!='undefined' && errors
+	div(class="alert alert-danger", role="alert")
+		button(type="button",class="close",data-dismiss="alert",aria-hidden="true") ×
+		i(class="fa fa-exclamation",aria-hidden="true") 
+		span &nbsp;&nbsp;Fix the follwing error(s)
+		ul
+		each error in errors
+			li= error.message
+form(method="POST")
+	div.form-group
+		label Title
+		input(type="text",class="form-control",name="title",id="title",value=(typeof product!='undefined')? product.title:"",required)
+	div.form-group
+		label SKU Code
+		input(type="text",class="form-control",name="sku",id="sku",value=(typeof product!='undefined')? product.sku:"",required)
+	div.form-group
+		label Category
+		select(class="form-control",name="category",id="category",required)
+			each category in categories
+				option(value=(category.key),selected=(typeof product!='undefined' && product.category == category.key)? "selected":false)= category.title
+	div.form-group
+		label Brand
+		select(class="form-control",name="brand",id="brand",required)
+			each brand in brands
+				option(value=(brand.key), selected=(typeof product!='undefined' && product.brand == brand.key)? "selected":false)= brand.title
+	div.form-group
+		label Unit Price 
+		div.input-group
+			span.input-group-addon
+				i.fa.fa-rupee
+			input(type="number",min="0",class="form-control",name="price",id="price",value=(typeof product!='undefined')? product.price:"",required)
+			span.input-group-addon .00	
+	div.form-group
+		label Stock
+		input(type="number",min="0",class="form-control",name="stock",id="stock",value=(typeof product!='undefined')? product.stock:"",required)
+	div.checkbox
+		label
+			if typeof product!='undefined' && product.status
+				input(type="checkbox",checked,name="status")
+			else
+				input(type="checkbox",name="status",id="status")
+			span Active?
+	button(class="btn btn-success",type="submit") Save
+	&nbsp;&nbsp;
+	a(class="btn btn-danger",href="/backoffice/product") Cancel

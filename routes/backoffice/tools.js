@@ -1,3 +1,4 @@
+var Product = require('../../models/product');
 module.exports = {
 	//Authorization Middleware
 	'authenticate': function(req, res, next) {
@@ -16,5 +17,14 @@ module.exports = {
 		    var pagerLength = parseInt((remainder == 0) ? quotient : quotient+1);
 	    }
 	    return pagerLength;
+	},
+	validateProduct: function(req, res, next){
+		Product.findOne({ key: req.params.key }, function(err, product) {
+			if (product.length == 0) {
+				res.redirect('/backoffice/product');
+			} else {
+				return next();
+			}
+		});
 	}
 };

@@ -6,8 +6,11 @@ html
 		div.wrapper
 			header.main-header
 				a(href="/backoffice",class="logo")
-					span.logo-mini	SM
-					span.logo-lg	Store Manager
+					span.logo-mini
+						i.fa.fa-shopping-cart
+					span.logo-lg
+						i.fa.fa-shopping-cart
+						span &nbsp;Store
 				nav(class="navbar navbar-static-top")
 					//Sidebar toggle button
 					a(href="#",class="sidebar-toggle",data-toggle="offcanvas",
@@ -25,5 +28,5 @@ html
 		div.content-wrapper
 			block content
 		footer.main-footer
-			strore Store Manager
+			p Store Manager
 		include scripts

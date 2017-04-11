@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../../models/user');
 var tools = require('./tools');
+var url = require('url');
 
 /* Admin Login */
 router.route('/login').get(function(req, res, next) {
@@ -47,9 +48,19 @@ router.route('/').get(tools.authenticate, function(req, res) {
   res.render('backoffice/index', { title: 'Back Office'});
 });
 
+router.use(function(req, res, next) {
+	var path = url.parse(req.url,true).path;
+	var pathArr = path.split("/");
+	pathArr.shift();
+	res.locals.base_route = pathArr[0];
+	next();
+});
+
 /* Category Routes */
 router.use('/', require('./category'));
 /* Brand Routes  */
 router.use('/', require('./brand'));
+/* Brand Products  */
+router.use('/', require('./product'));
 
 module.exports = router;

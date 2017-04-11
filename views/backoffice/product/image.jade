@@ -1,0 +1,35 @@
+extends ../layout/main
+block content
+	section.content-header
+		h1 Update Product -  #{product.title}
+	section.content
+		div.row
+			div.col-md-12
+				div.nav-tabs-custom
+					ul.nav.nav-tabs
+						li
+							a(href="/backoffice/product/update/"+product.key) Info
+						li.active
+							a(href="/backoffice/product/image") Image
+					div.tab-content
+						if typeof errors!='undefined' && errors
+							div(class="alert alert-danger", role="alert")
+								button(type="button",class="close",data-dismiss="alert",aria-hidden="true") ×
+								i(class="fa fa-exclamation",aria-hidden="true") 
+								span &nbsp;&nbsp;Fix the follwing error(s)
+								ul
+								each error in errors
+									li= error.message
+						form(method="POST",enctype="multipart/form-data")
+							div.form-group
+								label Upload Image
+								input(type="file",class="form-control",name="image",id="image",required)
+							button(class="btn btn-success",type="submit") Upload
+							&nbsp;&nbsp;
+							a(class="btn btn-danger",href="/backoffice/product") Cancel
+		if product.image !== undefined && product.image !== ""
+			div.row
+				div.col-md-12
+					div.thumbnail
+						a(class="btn btn-danger btn-sm pull-right confirm-delete",href="/backoffice/product/image/remove/"+product.key,confirm-message="Are you sure to remove the image?") Remove
+						img(src="/backoffice/product/image/load/"+product.key,alt=(product.title))
