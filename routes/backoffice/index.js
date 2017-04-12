@@ -56,6 +56,13 @@ router.use(function(req, res, next) {
 	next();
 });
 
+/* Category Routes */
+router.use('/', require('./category'));
+/* Brand Routes  */
+router.use('/', require('./brand'));
+/* Brand Products  */
+router.use('/', require('./product'));
+
 // catch 404 and forward to error handler
 router.use(function(req, res, next) {
   var err = new Error('Page Not Found !');
@@ -73,12 +80,5 @@ router.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('backoffice/error');
 });
-
-/* Category Routes */
-router.use('/', require('./category'));
-/* Brand Routes  */
-router.use('/', require('./brand'));
-/* Brand Products  */
-router.use('/', require('./product'));
 
 module.exports = router;
