@@ -1,0 +1,19 @@
+extends layout/main
+block content
+	section.content-header
+		h1 #{error.status} Error
+	section.content
+		div.error-page
+			h2.headline.text-red #{error.status}
+			div.error-content
+				h1
+					i.fa.fa-warning.text-red
+					span= message
+				if  error.status != 404
+					p The page you were looking not found ! Please try another url.
+				else
+					a(href="#",data-toggle="collapse",data-target="#trace") Trace
+						p(id="trace") #{error.stack}
+					
+
+

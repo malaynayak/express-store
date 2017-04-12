@@ -41,7 +41,7 @@ app.use('/bower_components',express.static(path.join(__dirname, 'bower_component
 app.use('/', index);
 app.use('/backoffice', backoffice);
 
-// catch 404 and forward to error handler
+//catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
