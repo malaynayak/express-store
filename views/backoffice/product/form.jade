@@ -40,6 +40,13 @@ form(method="POST")
 			else
 				input(type="checkbox",name="status",id="status")
 			span Active?
+		&nbsp;&nbsp;
+		label
+			if typeof product!='undefined' && product.featured
+				input(type="checkbox",checked,name="featured")
+			else
+				input(type="checkbox",name="featured",id="status")
+			span Featured?
 	button(class="btn btn-success",type="submit") Save
 	&nbsp;&nbsp;
 	a(class="btn btn-danger",href="/backoffice/product") Cancel

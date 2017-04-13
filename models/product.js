@@ -23,7 +23,7 @@ var productSchema = new Schema({
   },
   image: {
     type: Schema.Types.Mixed,
-    required: false
+    required: false,
   },
   price: {
     type: Number,
@@ -44,6 +44,10 @@ var productSchema = new Schema({
   status: {
     type: Boolean,
     default: 'true'
+  },
+  featured: {
+    type: Boolean,
+    default: 'false'
   },
   stock: {
     type     : Number,
@@ -106,4 +110,6 @@ productSchema.path('category').validate(function (category, fn) {
   });
 }, 'Invalid category selected');
 
-module.exports = mongoose.model('Product', productSchema);
+var model = mongoose.model('Product', productSchema);
+module.exports = model;
+
