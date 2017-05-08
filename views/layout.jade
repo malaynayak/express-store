@@ -1,7 +1,272 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		meta(http-equiv="Content-Type",content="text/html; charset=UTF-8")
+		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+		title= title
+		link(rel='stylesheet',href='css/bootstrap.min.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/settings.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/prettyPhoto.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/jquery.selectBox.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/font-awesome.min.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/elegant-icon.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/style.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/commerce.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/custom.css',type='text/css',media='all')
+		link(rel='stylesheet',href='css/preloader.css',type='text/css',media='all')
+		link(rel='stylesheet',href='https://fonts.googleapis.com/css?family=Lato%3A400%2C700%2C900&#038;ver=4.3.1',type='text/css',media='all')
+		//HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+		//WARNING: Respond.js doesn't work if you view the page via file://
+		<!--[if IE 8]>
+		script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
+		script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+		<![endif]-->
+	body(ng-app="App",ng-controller="MainController")
+		div#preloader
+			img(class="preloader__logo",src="images/logo-transparent.png",alt="" width="250" height="114")
+			div.preloader__progress
+				svg(width="60px",height="60px",viewBox="0 0 80 80",xmlns="http://www.w3.org/2000/svg")
+					path(class="preloader__progress-circlebg",fill="none",stroke="#dddddd",stroke-width="4",stroke-linecap="round",d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z")
+					path(id='preloader__progress-circle',fill="none",stroke="#bca480",stroke-width="4",stroke-linecap="round",stroke-dashoffset="192.61",stroke-dasharray="192.61 192.61",d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z")
+		div.offcanvas.open
+			div.offcanvas-wrap
+				div.offcanvas-user.clearfix
+					a(class="offcanvas-user-wishlist-link",href="/#!/wishlist")
+						i.fa.fa-heart-o My Wishlist
+					a(class="offcanvas-user-account-link",href="#")
+						i.fa.fa-user Login
+				nav.offcanvas-navbar
+					ul.offcanvas-nav
+						li.active
+							a(href="/#!",class="dropdown-hover") Home 
+						li
+							a(href="/#!/shop",class="dropdown-hover") SHOP 
+				div.offcanvas-widget
+					div.widget.social-widget
+						div.social-widget-wrap.social-widget-none
+							a(href="#",title="Facebook",target="_blank")
+								i.fa.fa-facebook
+							a(href="#",title="Twitter",target="_blank")
+								i.fa.fa-twitter
+							a(href="#",title="Google+",target="_blank")
+								i.fa.fa-google-plus
+							a(href="#",title="Pinterest",target="_blank")
+								i.fa.fa-pinterest
+		div.wide-wrap#wrapper
+		div.offcanvas-overlay
+		header.header-container.page-heading-heading.header-type-default.header-default-center.header-navbar-default.header-scroll-resize
+			div.navbar-container
+				div.navbar.navbar-default.navbar-scroll-fixed
+					div.navbar-default-wrap
+						div.navbar-default-container
+							div.navbar-default-row
+								div.navbar-default-col
+									div.navbar-wrap
+										div.navbar-header
+											div.container
+												div.row
+													div.col-md-12
+														div.navbar-header-left
+															div.user-login
+																ul.nav.top-nav
+																	li.menu-item
+																		a(data-rel="loginModal",href="#")
+																			i.fa.fa-user
+																			span Login
+														button(type="button",class="navbar-toggle")
+															span.sr-only Toggle navigation
+															span.icon-bar.bar-top
+															span.icon-bar.bar-middle
+															span.icon-bar.bar-bottom
+														a(class="navbar-search-button search-icon-mobile",href="#")
+															i.fa.fa-search
+														a(class="cart-icon-mobile",href="#")
+															i.elegant_icon_bag
+															span 0
+														a(class="navbar-brand",href="./")
+															img(class="logo",src="images/logo.png")
+															img(class="logo-fixed",src="images/logo-fixed.png")
+															img(class="logo-mobile",src="images/logo-mobile.png")
+														div.navbar-header-right
+															div.navbar-minicart-topbar
+																div.navbar-minicart
+																		a(class="minicart-link",href="#") My Cart
+																			span.minicart-icon
+																				i.minicart-icon-svg.elegant_icon_bag 
+																				span 0
+																		div(class="minicart",style="display: none;")
+																			div.minicart-header.no-items.show Your shopping bag is empty.
+																			div.minicart-footer
+																				div.minicart-actions.clearfix
+																					a(class="btn btn-white-outline",href="#")
+																						span.text Go to the shop
+															div.user-wishlist
+																a(href="wishlist.html")
+																	i.user-wishlist-icon.fa.fa-heart-o
+																	span My Wishlist
+										nav.collapse.navbar-collapse.primary-navbar-collapse
+											div.container
+												div.row
+													div.col-md-12
+														ul.nav.navbar-nav.primary-nav.sf-js-enabled.sf-arrows
+															li
+																a(href="/#!")
+																	span.underline Home
+															li
+																a(href="/#!/shop")
+																	span.underline SHOP
+															li.navbar-search
+																a(class="navbar-search-button",href="#")
+																	i.fa.fa-search
+																div.search-form-wrap
+																	form.searchform
+																		input(class="searchinput",name="s",autocomplete="off",value="",placeholder="Search...",type="search")
+		div.content-container.no-padding
+			div.container-full
+				div.row
+					div.col-md-12
+						div.main-content
+							block content
+		footer.footer
+			div.footer-contact
+				div.container
+					div.row
+						div.col-sm-4
+							div.footer-contact-item
+								div.footer-contact-icon
+									i.fa.fa-map-marker
+								div.footer-contact-text 356 St. James Square, Covnet Garden, England
+						div.col-sm-4
+							div.footer-contact-item
+								div.footer-contact-icon
+									i.fa.fa-phone
+								div.footer-contact-text + (400) 0123 456 789
+						div.col-sm-4
+							div.footer-contact-item
+								div.footer-contact-icon
+									i.fa.fa-envelope-o
+								div.footer-contact-text 
+									a(href="mailto:email@domain.com") email@domain.com
+			div.footer-info
+				a(href="#",class="go-to-top")
+					i.fa.fa-angle-double-up
+				div.container
+					div.row
+						div.col-md-12.text-center
+							div.copyright.text-center Copyright right &copy; 2015 Loja. All Rights Reserved.
+		#userloginModal.modal.fade.user-login-modal(tabindex='-1', role='dialog', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					form#userloginModalForm
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4.modal-title Login
+						.modal-body
+							.user-login-facebook
+								button.btn-login-facebook(type='button')
+									i.fa.fa-facebook
+									| Sign in with Facebook
+							.user-login-or
+								span or
+							.form-group
+								label Username
+								input#username.form-control(type='text', name='log', required='', value='', placeholder='Username')
+							.form-group
+								label(for='password') Password
+								input#password.form-control(type='password', required='', value='', name='pwd', placeholder='Password')
+							.checkbox.clearfix
+								label.form-flat-checkbox.pull-left
+									input#rememberme(type='checkbox', name='rememberme', value='forever')
+									i
+									|  Remember Me
+								span.lostpassword-modal-link.pull-right
+									a(href='#lostpasswordModal', data-rel='lostpasswordModal') Lost your password?
+						.modal-footer
+							span.user-login-modal-register.pull-left
+								a(data-rel='registerModal', href='#') Not a Member yet?
+							button.btn.btn-default.btn-outline(type='submit') Sign in
+		#userregisterModal.modal.fade.user-register-modal(tabindex='-1', role='dialog', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					form#userregisterModalForm
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4.modal-title Register account
+						.modal-body
+							.user-login-facebook
+								button.btn-login-facebook(type='button')
+									i.fa.fa-facebook
+									| Sign in with Facebook
+							.user-login-or
+								span or
+							.form-group
+								label Username
+								input.form-control(type='text', name='user_login', required='', value='', placeholder='Username')
+							.form-group
+								label(for='user_email') Email
+								input#user_email.form-control(type='email', name='user_email', required='', value='', placeholder='Email')
+							.form-group
+								label(for='user_password') Password
+								input#user_password.form-control(type='password', required='', value='', name='user_password', placeholder='Password')
+							.form-group
+								label(for='user_password') Retype password
+								input#cuser_password.form-control(type='password', required='', value='', name='cuser_password', placeholder='Retype password')
+						.modal-footer
+							span.user-login-modal-link.pull-left
+								a(data-rel='loginModal', href='#loginModal') Already have an account?
+							button.btn.btn-default.btn-outline(type='submit') Register
+		#userlostpasswordModal.modal.fade.user-lostpassword-modal(tabindex='-1', role='dialog', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					form#userlostpasswordModalForm
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden='true') ×
+								span.sr-only Close
+							h4.modal-title Forgot Password
+						.modal-body
+							.form-group
+								label Username or E-mail:
+								input.form-control(type='text', name='user_login', required='', value='', placeholder='Username or E-mail')
+						.modal-footer
+							span.user-login-modal-link.pull-left
+								a(data-rel='loginModal', href='#loginModal') Already have an account?
+							button.btn.btn-default.btn-outline(type='submit') Sign in
+		script(src="js/angular.min.js")
+		script(src="js/angular-route.min.js")
+		script(src="js/app/app.js")
+		script(src="js/app/controllers/main_controller.js")
+		script(src="js/app/controllers/home_controller.js")
+		script(src="js/app/controllers/shop_controller.js")
+		script(src="js/app/services/product.js")
+		script(src="js/jquery-1.11.3.min.js")
+		script(src="js/jquery-migrate.min.js")
+		script(src="js/jquery.themepunch.tools.min.js")
+		script(src="js/jquery.themepunch.revolution.min.js")
+		script(src="js/easing.min.js")
+		script(src="js/imagesloaded.pkgd.min.js")
+		script(src="js/bootstrap.min.js")
+		script(src="js/superfish-1.7.4.min.js")
+		script(src="js/jquery.appear.min.js")
+		script(src="js/script.js")
+		script(src="js/jquery.prettyPhoto.js")
+		script(src="js/jquery.prettyPhoto.init.min.js")
+		script(src="js/jquery.selectBox.min.js")
+		script(src="js/jquery.touchSwipe.min.js")
+		script(src="js/jquery.transit.min.js")
+		script(src="js/jquery.carouFredSel.min.js")
+		script(src="js/jquery.countdown.min.js")
+		script(src="js/isotope.pkgd.min.js")
+		script(src="js/preloader.min.js")
+		script(src="js/extensions/revolution.extension.actions.min.js")
+		script(src="js/extensions/revolution.extension.kenburn.min.js")
+		script(src="js/extensions/revolution.extension.layeranimation.min.js")
+		script(src="js/extensions/revolution.extension.migration.min.js")
+		script(src="js/extensions/revolution.extension.navigation.min.js")
+		script(src="js/extensions/revolution.extension.parallax.min.js")
+		script(src="js/extensions/revolution.extension.slideanims.min.js")
+		script(src="js/extensions/revolution.extension.video.min.js")

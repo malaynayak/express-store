@@ -20,7 +20,7 @@ module.exports = {
 	},
 	validateProduct: function(req, res, next){
 		Product.findOne({ key: req.params.key }, function(err, product) {
-			if (product.length == 0) {
+			if (product && product.length == 0) {
 				res.redirect('/backoffice/product');
 			} else {
 				return next();

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 var Product = require('../../models/product');
+var Category = require('../../models/category');
+var Brand = require('../../models/brand');
 
 //get all the products
 router.route('/products').get(function(req, res) {
@@ -82,7 +84,7 @@ router.route('/products').get(function(req, res) {
 });
 
 //Load a product
-router.route('/product/:key').get(function(req, res) {
+router.route('/product/load/:key').get(function(req, res) {
   Product.findOne({ key: req.params.key }, function(err, product) {
     if (err) {
       return res.json(err);
@@ -96,6 +98,34 @@ router.route('/product/:key').get(function(req, res) {
       }); 
     }
     res.json(product);
+  });
+});
+
+
+//Load a product categories
+router.route('/product/categories').get(function(req, res) {
+  Category.count({status:true},function(err, count){
+      var results = Category.find({status:true});
+      results.exec(function(err, categories) {
+        if (err) {
+          return res.send(err);
+        }
+        res.json(categories);
+      });
+  });
+});
+
+
+//Load a product brands
+router.route('/product/brands').get(function(req, res) {
+  Brand.count({status:true},function(err, count){
+      var results = Brand.find({status:true});
+      results.exec(function(err, categories) {
+        if (err) {
+          return res.send(err);
+        }
+        res.json(categories);
+      });
   });
 });
 

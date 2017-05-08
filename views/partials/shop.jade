@@ -1,0 +1,75 @@
+.container
+	.row
+		.commerce.page-layout-left-sidebar
+			.col-md-9.main-wrap
+				.main-content
+					.woo-content
+						.shop-toolbar
+							.view-mode
+								a(class="mode-toggle grid-mode active",
+									ng-click="toggleDisplayMode($event)",href="javascript:void(0);")
+									i.fa.fa-th
+								a(class="mode-toggle list-mode",
+									ng-click="toggleDisplayMode($event)",href="javascript:void(0);")
+									i.fa.fa-th-list
+							form.commerce-ordering.clearfix
+								div.commerce-ordering-select
+									label.hide Sorting:
+									.form-flat-select
+										select(name="orderby",class="orderby")
+											option(value="", selected="selected") Default sorting
+											option(value="") Sort By - Price Ascending
+											option(value="") Sort By - Price Descending
+								div.commerce-ordering-select
+						.shop-loop.grid
+							ul.products
+								li.product(ng-repeat="product in products")
+									.product-container
+										figure
+											.product-wrap
+												.product-images
+													.shop-loop-thumbnail.shop-loop-front-thumbnail
+														a(href="#")
+															img(src='/product/image/thumb/{{product.key}}',width="400",height="450")
+													.shop-loop-thumbnail.shop-loop-back-thumbnail
+														a(href="#")
+															img(src='/product/image/thumb/{{product.key}}',width="400",height="450")
+												.shop-loop-actions
+													a(href="#",class="add_to_cart_button product_type_simple") Add to cart
+													a(href="#",class="shop-loop-quickview product_type_simple", title="View")
+													.yith-wcwl-add-to-wishlist
+														.yith-wcwl-add-button
+															a(class="add_to_wishlist",href="#") Add to wish lsit
+													.clear
+											figcaption
+												.shop-loop-product-info
+												.info-title
+													h3.product_title
+														a(href="#") {{product.title}}
+												.info-meta
+													.info-price
+														span.price
+															span.amount {{product.price}} INR.
+						nav.commerce-pagination
+							p.commerce-result-count
+								| Showing 10 of 500 products
+							.paginate
+								.paginate_links
+									span.page-numbers.current 1
+									a(href="#",class="page-numbers") 2 
+									a(class="next page-numbers", href="#")
+										i.fa.fa-angle-right
+			.col-md-3.sidebar-wrap
+				.main-sidebar
+					.widget.widget_product_categories
+						h4.widget-title
+							span Categories
+						ul.product-categories
+							li(ng-repeat="cat in categories")
+								a(href="#") {{cat.title}}
+					.widget.widget_layered_nav
+						h4.widget-title
+							span Brands
+						ul.product-categories
+							li(ng-repeat="brand in brands")
+								a(href="#") {{brand.title}}

@@ -191,7 +191,7 @@ router.route('/product/image/load/:key').get(tools.validateProduct,
 		if (err) {
 			return res.send(err);
 		}
-		if(product.image !== undefined && product.image != ""){
+		if(product && product.image !== undefined && product.image != ""){
 			var readStream = fs.createReadStream(path.join(product.image.destination, 
 				product.image.filename));
 				readStream.on('error',function(err){

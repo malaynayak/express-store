@@ -1,0 +1,81 @@
+div#rev_slider_wrapper.rev_slider_wrapper.fullwidthbanner-container
+	div#rev_slider.rev_slider.fullwidthabanner
+		ul  
+			li(data-index="rs-3",data-transition="fade",data-slotamount="default",data-easein="default" data-easeout="default",data-masterspeed="default",data-thumb="",data-rotate="0",data-saveperformance="off",data-title="Slide",data-description="")
+					img(src="images/sliders/slider-1.jpg",alt="",width="1920",height="780",data-bgposition="center center",data-bgfit="cover",data-bgrepeat="no-repeat",class="rev-slidebg",data-no-retina)
+			li(data-index="rs-4",data-transition="fade",data-slotamount="default",data-easein="default" data-easeout="default",data-masterspeed="default",data-thumb="",data-rotate="0",data-saveperformance="off",data-title="Slide",data-description="")
+					img(src="images/sliders/slider-2.jpg",alt="",width="1920",height="780",data-bgposition="center center",data-bgfit="cover",data-bgrepeat="no-repeat",class="rev-slidebg",data-no-retina)
+.row.row-fluid
+	.col-sm-12
+		.container
+			.col-icon-border.col-sm-4.pt-0.pb-3
+				.icon_element.icon_element-outer.mb-0.pt-5.icon_element-align-center
+					.icon_element-inner.icon_element-size-lg
+						span.icon_element-icon.fa.fa-truck
+				h5.text-center FREE DELIVERY WORDWIDE
+				p.text-center
+					span.footer-service-text
+						| World wide shipping
+						br
+			.col-icon-border.col-sm-4.pb-3
+				.icon_element.icon_element-outer.mb-0.pt-5.icon_element-align-center
+					.icon_element-inner.icon_element-size-lg
+						span.icon_element-icon.fa.fa-money
+				h5.text-center FREE RETURN IN 90 DAYS
+				p.text-center
+					span.footer-service-text 100% Money back – 30 Days
+			.col-icon-border.col-sm-4.pb-3
+				.icon_element.icon_element-outer.mb-0.pt-5.icon_element-align-center
+					.icon_element-inner.icon_element-size-lg
+						span.icon_element-icon.fa.fa-life-ring
+				h5.text-center BEST SUPPORT
+				p.text-center
+					span.footer-service-text Fast & pro 24/7
+.container
+	.row.row-fluid
+		.col-sm-12
+			h2.mb-5.heading-nice-border.text-center
+				span.nice-border
+					span.nice-border-bottom-right
+					span.nice-border-top-left
+					span.nice-border-content FEATURED PRODUCTS
+			.tta-container
+				.general.tta.tta-spacing-1.tabs-border.tta-controls-align-center
+					.caroufredsel.product-slider(data-height='variable', data-scroll-fx='scroll', data-scroll-item='1', data-visible-min='1', data-visible-max='4', data-responsive='1', data-infinite='1', data-autoplay='0', data-circular='1', style='opacity: 1;')
+						.caroufredsel-wrap
+							.commerce.commerce-lookbok.columns-4
+								.caroufredsel_wrapper(style='display: block; text-align: start; float: none; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 1188px; height: 370px; margin: 0px 0px 13px; overflow: hidden; cursor: move;')
+									ul.products.columns-4(data-columns='4', style='text-align: left; float: none; position: absolute; top: 0px; right: auto; bottom: auto; left: 0px; margin: 0px; width: 6534px; height: 370px;')
+										li.product(style='width: 277px;',ng-repeat="product in featuredProducts")
+											.product-container
+												figure
+													.product-wrap
+														.product-images
+															.shop-loop-thumbnail.shop-loop-front-thumbnail
+																a(href='#')
+																	img(src='/product/image/thumb/{{product.key}}', height='400', width='450')
+															.shop-loop-thumbnail.shop-loop-back-thumbnail
+																a(href='#')
+																	img(src='/product/image/thumb/{{product.key}}',, height='400', width='450')
+														.shop-loop-actions
+															a.add_to_cart_button.product_type_simple.product_type_simple(href='#')
+																| View
+															a.shop-loop-quickview(href='#', data-original-title='Quick view')
+															.yith-wcwl-add-to-wishlist
+																.yith-wcwl-add-button
+																	a.add_to_wishlist(href='#')
+																		| Add to Wishlist
+															.clear
+													figcaption
+														.shop-loop-product-info
+															.info-title
+																h3.product_title
+																	a(href='#')
+																		| {{product.title}}
+															.info-meta
+																.info-price
+																	span.price
+																		span.amount
+																			| {{product.price}} INR.
+							a.caroufredsel-prev(href='#', style='display: block;')
+							a.caroufredsel-next(href='#', style='display: block;')
