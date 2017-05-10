@@ -17,7 +17,7 @@ router.route('/brand').get(tools.authenticate, function(req, res) {
 	}
 
 	Brand.count(filter,function(err, count){
-	    var pageSize = 5;
+	    var pageSize = 10;
 	    var skip = 0;
 	    var pagerLength = tools.getPagerLength(pageSize,count);
 	    var pageNo = parseInt(query.page);

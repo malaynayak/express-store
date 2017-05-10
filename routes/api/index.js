@@ -16,8 +16,16 @@ router.route('/products').get(function(req, res) {
   if(query.category !== undefined && query.category !== ""){
     filterParams.push({"category":query.category});
   }
-  if(query.brand !== undefined && query.brand !== ""){
-    filterParams.push({"brand":query.brand});
+  if(query.brands !== undefined && query.brands.length){
+    if(Array.isArray(query.brands) && query.brands.length > 1){
+      var selectedBrands = [];
+      for(var i=0;i<query.brands.length;i++){
+        selectedBrands.push({"brand":query.brands[i]});
+      }
+      filterParams.push({$or:selectedBrands});
+    } else {
+      filterParams.push({"brand":query.brands});
+    }
   }
   if(query.featured !== undefined && query.featured !== ""){
     filterParams.push({"featured":query.featured});
@@ -29,8 +37,7 @@ router.route('/products').get(function(req, res) {
     filters = {status:true};
   }
 	Product.count(filters,function(err, count){
-      
-      var results = Product.aggregate([
+      var aggregateParams = [
         { $match: filters },
         {
           $lookup: {
@@ -47,20 +54,20 @@ router.route('/products').get(function(req, res) {
            foreignField: "key",
            as: "brand"
           }
-        },
-      ]);
-      
+        }
+      ];
+      var limit = 9;
       if(query.limit !== undefined && query.limit !== "" 
         && parseInt(query.limit) == query.limit){
         limit = parseInt(query.limit);
-        if(query.page !== undefined && query.page !== "" 
-          && parseInt(query.page) == query.page){
-          page = parseInt(query.page);
-          skip = (page - 1) * limit;
-          results = results.limit(limit).skip(skip);
-        }
       }
-
+      if(query.page !== undefined && query.page !== "" 
+        && parseInt(query.page) == query.page){
+        page = parseInt(query.page);
+        skip = (page - 1) * limit;
+        aggregateParams.push({$skip:skip});
+      }
+      var results = Product.aggregate(aggregateParams).limit(limit);
       if(query.sort !== undefined && query.sort !== ""){
         var order = 1;
         if(query.order !== undefined){
@@ -78,8 +85,11 @@ router.route('/products').get(function(req, res) {
         if (err) {
           return res.send(err);
         }
-        res.json(products);
-    });
+        res.json({
+          total:count,
+          products:products
+        });
+      });
   });
 });
 

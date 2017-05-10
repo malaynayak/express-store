@@ -24,6 +24,8 @@ block content
 									tr
 										th Title
 										th SKU
+										th Category
+										th Brand
 										th Price
 										th Stock
 										th Status
@@ -32,6 +34,8 @@ block content
 									tr
 										td= item.title
 										td= item.sku
+										td= item.category[0].title
+										td= item.brand[0].title
 										td
 											span
 												i.fa.fa-rupee

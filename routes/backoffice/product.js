@@ -12,7 +12,6 @@ var multer = require('multer');
 /* List Products */
 router.route('/product').get(tools.authenticate, function(req, res) {
 	var filter = {};
-
 	var query = url.parse(req.url, true).query;
 	var search = "";
 	if(query.search !== undefined && query.search !== ""){
@@ -20,31 +19,54 @@ router.route('/product').get(tools.authenticate, function(req, res) {
 	    filter.$or = [{"key":new RegExp(search, "i")},
 	    	{"title":new RegExp(search, "i")}];
 	}
-
+	
 	Product.count(filter,function(err, count){
 	    var pageSize = 10;
 	    var skip = 0;
 	    var pagerLength = tools.getPagerLength(pageSize,count);
-	    var pageNo = parseInt(query.page);
-	    if(isNaN(pageNo)) 
-	    	pageNo = 1;
-	    if(pageNo !== undefined && pageNo !== "" && typeof pageNo == "number"){
-	      skip = (query.page - 1) * pageSize;
-	    } 
-	    Product.find(filter).limit(pageSize).skip(skip).
-	    	exec(function(err, products) {
-				if (err) {
-					return res.send(err);
-				}
-				res.render('backoffice/product/index', { 
-					title: 'Product Products', 
-					products : products,
-					search:search, 
-					pages:pagerLength, 
-					pageNo:pageNo,
-					search:search
-				});
-		});
+	    var pageNo = 1;
+	    if(query.page !== undefined && query.page !== ""){
+	    	pageNo = parseInt(query.page);
+	    	if(pageNo !== NaN){
+				skip = (pageNo - 1) * pageSize;
+	    	}
+	    }
+	    var results = Product.aggregate([
+	        { $match: filter },
+	        {
+	          $lookup: {
+	           from: "categories",
+	           localField: "category",
+	           foreignField: "key",
+	           as: "category"
+	          }
+	        },
+	        {
+	          $lookup: {
+	           from: "brands",
+	           localField: "brand",
+	           foreignField: "key",
+	           as: "brand"
+	          }
+	        },
+	        { $skip: skip },
+	    ]).limit(pageSize);
+
+	    // return res.send(pageSize+"::"+skip);
+
+	    results.exec(function(err, products) {
+		    if (err) {
+		      return res.send(err);
+		    }
+		    res.render('backoffice/product/index', { 
+				title: 'Product Products', 
+				products : products,
+				search:search, 
+				pages:pagerLength, 
+				pageNo:pageNo,
+				search:search
+			});
+	    });
 	});
 });
 

@@ -16,11 +16,17 @@
 								div.commerce-ordering-select
 									label.hide Sorting:
 									.form-flat-select
-										select(name="orderby",class="orderby")
+										select(name="orderby",class="orderby",ng-model="sortOrder",ng-change="sortProducts(sortOrder)")
 											option(value="", selected="selected") Default sorting
-											option(value="") Sort By - Price Ascending
-											option(value="") Sort By - Price Descending
+											option(value="price-asc") Sort By - Price Ascending
+											option(value="price-desc") Sort By - Price Descending
 								div.commerce-ordering-select
+						nav.commerce-pagination(ng-if="page<=pagerLength")
+							p.commerce-result-count
+								| Showing {{ ((page-1)*limit)+1}}-{{(page*limit)> total? total:page*limit }} of {{total}} products
+							.paginate
+								.paginate_links
+									a(href="javascript:void(0);",ng-click="changePage($index+1)",ng-class="(n+1)==page ? 'page-numbers current' : 'page-numbers'",ng-repeat="n in [] | range:pagerLength"){{$index+1}}
 						.shop-loop.grid
 							ul.products
 								li.product(ng-repeat="product in products")
@@ -50,15 +56,12 @@
 													.info-price
 														span.price
 															span.amount {{product.price}} INR.
-						nav.commerce-pagination
+						nav.commerce-pagination(ng-if="page<=pagerLength")
 							p.commerce-result-count
-								| Showing 10 of 500 products
+								| Showing {{ ((page-1)*limit)+1}}-{{(page*limit)> total? total:page*limit }} of {{total}} products
 							.paginate
 								.paginate_links
-									span.page-numbers.current 1
-									a(href="#",class="page-numbers") 2 
-									a(class="next page-numbers", href="#")
-										i.fa.fa-angle-right
+									a(href="javascript:void(0);",ng-click="changePage($index+1)",ng-class="(n+1)==page ? 'page-numbers current' : 'page-numbers'",ng-repeat="n in [] | range:pagerLength"){{$index+1}}
 			.col-md-3.sidebar-wrap
 				.main-sidebar
 					.widget.widget_product_categories
@@ -66,10 +69,11 @@
 							span Categories
 						ul.product-categories
 							li(ng-repeat="cat in categories")
-								a(href="#") {{cat.title}}
-					.widget.widget_layered_nav
+								a(href="javascript:void(0);",ng-click="filterByCategory(cat.key)") {{cat.title}}
+					.widget.widget_product_categories
 						h4.widget-title
 							span Brands
 						ul.product-categories
 							li(ng-repeat="brand in brands")
-								a(href="#") {{brand.title}}
+								input(type="checkbox",value="{{brand.key}}",ng-click="filterByBrands($event)")
+								&nbsp;{{brand.title}}

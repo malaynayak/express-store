@@ -7,7 +7,7 @@ angular.module('App.controllers.Home', [
 		initiateSlider();
 		$scope.featuredProducts = [];
 		ProductService.getFeaturedProducts().then(function(response){
-			$scope.featuredProducts = response.data;
+			$scope.featuredProducts = response.data.products;
 			carouselInit();
 		});
 }]);
