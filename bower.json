@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "AdminLTE": "admin-lte#^2.3.11",
-    "bootbox.js": "bootbox#^4.4.0"
+    "bootbox.js": "bootbox#^4.4.0",
+    "ckeditor": "^4.6.2"
   }
 }

@@ -52,13 +52,13 @@ div#rev_slider_wrapper.rev_slider_wrapper.fullwidthbanner-container
 													.product-wrap
 														.product-images
 															.shop-loop-thumbnail.shop-loop-front-thumbnail
-																a(href='#')
+																a(ng-href='/#!/product/{{product.key}}')
 																	img(src='/product/image/thumb/{{product.key}}', height='400', width='450')
 															.shop-loop-thumbnail.shop-loop-back-thumbnail
-																a(href='#')
+																a(ng-href='/#!/product/{{product.key}}')
 																	img(src='/product/image/thumb/{{product.key}}',, height='400', width='450')
 														.shop-loop-actions
-															a.add_to_cart_button.product_type_simple.product_type_simple(href='#')
+															a.add_to_cart_button.product_type_simple.product_type_simple(ng-href='/#!/product/{{product.key}}')
 																| View
 															a.shop-loop-quickview(href='#', data-original-title='Quick view')
 															.yith-wcwl-add-to-wishlist

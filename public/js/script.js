@@ -205,7 +205,7 @@
 			});
 			
 			//Ajax Search
-			this.ajaxSearchInit();
+			//this.ajaxSearchInit();
 			
 			//User Login and register account.
 			this.userInit();
@@ -942,19 +942,19 @@
 					    cssArrows:     true,               // set to false if you want to remove the CSS-based arrow triangles
 					    disableHI:     false,              // set to true to disable hoverIntent detection
 					});
-					$('.primary-nav').superfish({
-						anchorClass: '.dropdown',      // selector within menu context to define the submenu element to be revealed
-					    hoverClass:    'open',          // the class applied to hovered list items
-					    pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page
-					    pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass
-					    delay:         650,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
-					    animation:     {opacity:'show'},   // an object equivalent to first parameter of jQuery’s .animate() method. Used to animate the submenu open
-					    animationOut:  {opacity:'hide'},   // an object equivalent to first parameter of jQuery’s .animate() method Used to animate the submenu closed
-					    speed:         'fast',           // speed of the opening animation. Equivalent to second parameter of jQuery’s .animate() method
-					    speedOut:      'fast',             // speed of the closing animation. Equivalent to second parameter of jQuery’s .animate() method
-					    cssArrows:     true,               // set to false if you want to remove the CSS-based arrow triangles
-					    disableHI:     false,              // set to true to disable hoverIntent detection
-					 });
+					// $('.primary-nav').superfish({
+					// 	anchorClass: '.dropdown',      // selector within menu context to define the submenu element to be revealed
+					//     hoverClass:    'open',          // the class applied to hovered list items
+					//     pathClass:     'overideThisToUse', // the class you have applied to list items that lead to the current page
+					//     pathLevels:    1,                  // the number of levels of submenus that remain open or are restored using pathClass
+					//     delay:         650,                // the delay in milliseconds that the mouse can remain outside a submenu without it closing
+					//     animation:     {opacity:'show'},   // an object equivalent to first parameter of jQuery’s .animate() method. Used to animate the submenu open
+					//     animationOut:  {opacity:'hide'},   // an object equivalent to first parameter of jQuery’s .animate() method Used to animate the submenu closed
+					//     speed:         'fast',           // speed of the opening animation. Equivalent to second parameter of jQuery’s .animate() method
+					//     speedOut:      'fast',             // speed of the closing animation. Equivalent to second parameter of jQuery’s .animate() method
+					//     cssArrows:     true,               // set to false if you want to remove the CSS-based arrow triangles
+					//     disableHI:     false,              // set to true to disable hoverIntent detection
+					//  });
 				}else{
 					$('.primary-nav').superfish('destroy');  // yup
 				}

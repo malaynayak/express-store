@@ -3,6 +3,7 @@ angular.module('App', [
   'App.controllers.Main',
   'App.controllers.Home',
   'App.controllers.Shop',
+  'App.controllers.Product',
 ])
 .config(function($routeProvider) {
     $routeProvider
@@ -14,6 +15,11 @@ angular.module('App', [
     .when("/shop", {
         templateUrl : "partials/shop.html",
         controller : "ShopController",
+        reloadOnSearch: false
+    })
+    .when("/product/:key", {
+        templateUrl : "partials/product.html",
+        controller : "ProductController",
         reloadOnSearch: false
     })
     .otherwise("/", {

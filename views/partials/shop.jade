@@ -20,14 +20,15 @@
 											option(value="", selected="selected") Default sorting
 											option(value="price-asc") Sort By - Price Ascending
 											option(value="price-desc") Sort By - Price Descending
-								div.commerce-ordering-select
-						nav.commerce-pagination(ng-if="page<=pagerLength")
+						nav.commerce-pagination(ng-if="page<=pagerLength && total > 0")
 							p.commerce-result-count
 								| Showing {{ ((page-1)*limit)+1}}-{{(page*limit)> total? total:page*limit }} of {{total}} products
 							.paginate
-								.paginate_links
+								.paginate_links(ng-if="pagerLength > 1")
 									a(href="javascript:void(0);",ng-click="changePage($index+1)",ng-class="(n+1)==page ? 'page-numbers current' : 'page-numbers'",ng-repeat="n in [] | range:pagerLength"){{$index+1}}
 						.shop-loop.grid
+							p.alert.alert-info(ng-if="!total") No products were found matching your selection.
+
 							ul.products
 								li.product(ng-repeat="product in products")
 									.product-container
@@ -35,14 +36,14 @@
 											.product-wrap
 												.product-images
 													.shop-loop-thumbnail.shop-loop-front-thumbnail
-														a(href="#")
+														a(ng-href="/#!/product/{{product.key}}")
 															img(src='/product/image/thumb/{{product.key}}',width="400",height="450")
 													.shop-loop-thumbnail.shop-loop-back-thumbnail
-														a(href="#")
+														a(ng-href="/#!/product/{{product.key}}")
 															img(src='/product/image/thumb/{{product.key}}',width="400",height="450")
 												.shop-loop-actions
 													a(href="#",class="add_to_cart_button product_type_simple") Add to cart
-													a(href="#",class="shop-loop-quickview product_type_simple", title="View")
+													a(ng-href="/#!/product/{{product.key}}",class="shop-loop-quickview product_type_simple", title="View")
 													.yith-wcwl-add-to-wishlist
 														.yith-wcwl-add-button
 															a(class="add_to_wishlist",href="#") Add to wish lsit
@@ -56,11 +57,11 @@
 													.info-price
 														span.price
 															span.amount {{product.price}} INR.
-						nav.commerce-pagination(ng-if="page<=pagerLength")
+						nav.commerce-pagination(ng-if="page<=pagerLength && total > 0")
 							p.commerce-result-count
 								| Showing {{ ((page-1)*limit)+1}}-{{(page*limit)> total? total:page*limit }} of {{total}} products
 							.paginate
-								.paginate_links
+								.paginate_links(ng-if="pagerLength > 1")
 									a(href="javascript:void(0);",ng-click="changePage($index+1)",ng-class="(n+1)==page ? 'page-numbers current' : 'page-numbers'",ng-repeat="n in [] | range:pagerLength"){{$index+1}}
 			.col-md-3.sidebar-wrap
 				.main-sidebar
@@ -68,7 +69,7 @@
 						h4.widget-title
 							span Categories
 						ul.product-categories
-							li(ng-repeat="cat in categories")
+							li(ng-repeat="cat in categories",ng-class="filters.category==cat.key ? 'cat-item current-cat' : 'cat-item'")
 								a(href="javascript:void(0);",ng-click="filterByCategory(cat.key)") {{cat.title}}
 					.widget.widget_product_categories
 						h4.widget-title

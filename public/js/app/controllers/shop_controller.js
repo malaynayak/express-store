@@ -7,6 +7,7 @@ angular.module('App.controllers.Shop', [])
 		$scope.order = {};
 		$scope.filters = {};
 		$scope.filters.brands = [];
+		$scope.filters.search = "";
 		$scope.products = [];
 		$scope.categories = [];
 		$scope.brands = [];
@@ -46,7 +47,11 @@ angular.module('App.controllers.Shop', [])
 		}
 
 		$scope.filterByCategory = function(category){
-			$scope.filters.category = category;
+			if($scope.filters.category == category){
+				$scope.filters.category = "";
+			} else {
+				$scope.filters.category = category;
+			}
 			$scope.loadProducts();
 		}
 
@@ -74,6 +79,10 @@ angular.module('App.controllers.Shop', [])
 			});
 		}
 
+		$scope.$on("SearchProducts", function(evt,data){ 
+			$scope.filters.search = data.query;
+			$scope.loadProducts();
+		});
 		$scope.loadProducts();
 }]);
 

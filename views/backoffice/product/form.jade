@@ -11,6 +11,10 @@ form(method="POST")
 		label Title
 		input(type="text",class="form-control",name="title",id="title",value=(typeof product!='undefined')? product.title:"",required)
 	div.form-group
+		label Description
+		textarea(class="form-control ckeditor",name="description",id="description",rows="8") #{(typeof product!='undefined')? product.description:""}
+
+	div.form-group
 		label SKU Code
 		input(type="text",class="form-control",name="sku",id="sku",value=(typeof product!='undefined')? product.sku:"",required)
 	div.form-group

@@ -10,6 +10,7 @@ var productSchema = new Schema({
     maxlength: [100, "Title should not exceed 100 letters"],
     unique: true
   },
+  description: String,
   key: {
     type: String,
     maxlength: [100, "Key should not exceed 100 letters"],

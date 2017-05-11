@@ -108,19 +108,20 @@ html
 											div.container
 												div.row
 													div.col-md-12
-														ul.nav.navbar-nav.primary-nav.sf-js-enabled.sf-arrows
+														ul.nav.navbar-nav.primary-nav
 															li
 																a(href="/#!")
 																	span.underline Home
 															li
 																a(href="/#!/shop")
 																	span.underline SHOP
-															li.navbar-search
-																a(class="navbar-search-button",href="#")
+															li.navbar-search(ng-if="showSearchForm")
+																a(class="navbar-search-button",href="javascript:void(0);",ng-click="initiateSearch()")
 																	i.fa.fa-search
 																div.search-form-wrap
-																	form.searchform
-																		input(class="searchinput",name="s",autocomplete="off",value="",placeholder="Search...",type="search")
+																	form.searchform(ng-submit="initiateSearch()")
+																		input(class="searchinput",name="search",
+																		id="search",autocomplete="off",value="",placeholder="Search...",type="search")
 		div.content-container.no-padding
 			div.container-full
 				div.row
@@ -238,10 +239,12 @@ html
 							button.btn.btn-default.btn-outline(type='submit') Sign in
 		script(src="js/angular.min.js")
 		script(src="js/angular-route.min.js")
+		script(src="js/angular-sanitize.js")
 		script(src="js/app/app.js")
 		script(src="js/app/controllers/main_controller.js")
 		script(src="js/app/controllers/home_controller.js")
 		script(src="js/app/controllers/shop_controller.js")
+		script(src="js/app/controllers/product_controller.js")
 		script(src="js/app/services/product.js")
 		script(src="js/jquery-1.11.3.min.js")
 		script(src="js/jquery-migrate.min.js")

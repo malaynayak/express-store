@@ -30,6 +30,9 @@ router.route('/products').get(function(req, res) {
   if(query.featured !== undefined && query.featured !== ""){
     filterParams.push({"featured":query.featured});
   }
+  if(query.related !== undefined && query.related !== ""){
+    filterParams.push({"key":{$ne:query.related}});
+  }
   if(filterParams.length){
     filterParams.push({status:true});
     filters.$and = filterParams;
