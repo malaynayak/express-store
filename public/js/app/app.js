@@ -4,6 +4,7 @@ angular.module('App', [
   'App.controllers.Home',
   'App.controllers.Shop',
   'App.controllers.Product',
+  'App.directives.Custom'
 ])
 .config(function($routeProvider) {
     $routeProvider

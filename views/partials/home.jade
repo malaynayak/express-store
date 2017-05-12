@@ -58,9 +58,9 @@ div#rev_slider_wrapper.rev_slider_wrapper.fullwidthbanner-container
 																a(ng-href='/#!/product/{{product.key}}')
 																	img(src='/product/image/thumb/{{product.key}}',, height='400', width='450')
 														.shop-loop-actions
-															a.add_to_cart_button.product_type_simple.product_type_simple(ng-href='/#!/product/{{product.key}}')
+															a.add_to_cart_button.product_type_simple.product_type_simple
 																| View
-															a.shop-loop-quickview(href='#', data-original-title='Quick view')
+															a.shop-loop-quickview(ng-href='/#!/product/{{product.key}}', data-original-title='Quick view')
 															.yith-wcwl-add-to-wishlist
 																.yith-wcwl-add-button
 																	a.add_to_wishlist(href='#')
