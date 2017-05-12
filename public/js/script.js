@@ -182,7 +182,7 @@
 				self.navDropdown();
 			})
 			//Heading Parallax
-			this.headingInit();
+			//this.headingInit();
 			
 			//PopUp
 			this.magnificpopupInit();
@@ -214,7 +214,7 @@
 			this.shortcodeInit();
 			
 			//Parallax code
-			this.parallaxInit();
+			//this.parallaxInit();
 		},
 		parallaxInit: function(){
 			function localFunction() {

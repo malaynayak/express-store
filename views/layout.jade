@@ -116,14 +116,23 @@ html
 															li
 																a(href="/#!/shop")
 																	span.underline SHOP
-															li.navbar-search(ng-if="showSearchForm")
+															li.navbar-search(ng-if="isShopPage")
 																a(class="navbar-search-button",href="javascript:void(0);",ng-click="initiateSearch()")
 																	i.fa.fa-search
 																div.search-form-wrap
 																	form.searchform(ng-submit="initiateSearch()")
 																		input(class="searchinput",name="search",
 																		id="search",autocomplete="off",value="",placeholder="Search...",type="search")
-		div.content-container.no-padding
+		
+		.heading-container.heading-resize.heading-no-button(ng-if="isShopPage")
+			.heading-background.heading-parallax.bg-2(style="transform: translate3d(0px, 0px, 0px);")
+				.container
+					.row
+						.col-md-12
+							.heading-wrap
+								.page-title
+									h1 Shop
+		div(ng-class="noPadding?'content-container  no-padding':'content-container'")
 			div.container-full
 				div.row
 					div.col-md-12
