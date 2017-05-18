@@ -1,0 +1,24 @@
+#userloginModal.modal.fade.user-login-modal(tabindex='-1', role='dialog', aria-hidden='true')
+	.modal-dialog
+		.modal-content
+			form#userloginModalForm(name="loginForm",novalidate="",ng-submit="submitLoginForm()")
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') ×
+						span.sr-only Close
+					h4.modal-title Login
+				.modal-body
+					.form-group
+						label Username
+						input#username.form-control(type='text', name='username', required='', value='', placeholder='Username', ng-model="login.username")
+						div.has-error(ng-show="loginForm.username.$dirty && loginForm.username.$invalid")
+							p.help-block(ng-show="loginForm.username.$error.required") Username is required
+					.form-group
+						label(for='password') Password
+						input#password.form-control(type='password', required='', value='', name='password', placeholder='Password',ng-model="login.password")
+						div.has-error(ng-show="loginForm.password.$dirty && loginForm.password.$invalid")
+							p.help-block(ng-show="loginForm.password.$error.required") Password is required
+				.modal-footer
+					span.user-login-modal-register.pull-left
+						a(data-rel='registerModal', href='#') Not a Member yet?
+					input.btn.btn-default.btn-outline(type='submit',ng-disabled="loginForm.$invalid",value="Sign in") 

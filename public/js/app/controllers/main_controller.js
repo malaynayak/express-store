@@ -1,5 +1,17 @@
-angular.module('App.controllers.Main', [])
-
+angular.module('App.controllers.Main', []) 
+.directive("compareTo", function() {
+    return {
+        require: "ngModel",
+        scope: {
+            comparingModel: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.comparingModel;
+            };
+        }
+    };
+})
 .controller('MainController', ["$rootScope", "$scope", "$location", 
 	function($rootScope, $scope, $location){
 		$rootScope.isShopPage = false;
@@ -14,5 +26,25 @@ angular.module('App.controllers.Main', [])
 	    	var query = angular.element(document.getElementById("search")).val();
 	    	$rootScope.$broadcast("SearchProducts",{query:query});
 	    }
+
+	    $scope.registration = {
+            username : '',
+            email : '',
+            password : '',
+            retype_password : ''
+        };
+
+        $scope.login = {
+            username : '',
+            password : '',
+        };
+
+        $scope.submitRegistrationForm = function(){
+        	alert("Submitted");
+        }
+
+        $scope.submitLoginForm = function(){
+            alert("Submitted");
+        }
 	}
 ]);

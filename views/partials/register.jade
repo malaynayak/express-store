@@ -1,0 +1,39 @@
+#userregisterModal.modal.fade.user-register-modal(tabindex='-1', role='dialog', aria-hidden='true')
+	.modal-dialog
+		.modal-content
+			form#userregisterModalForm(name="registrationForm",novalidate="",ng-submit="submitRegistrationForm()")
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') ×
+						span.sr-only Close
+					h4.modal-title Register
+				.modal-body
+					.form-group
+						label(for='username') Username
+						input.form-control(type='text', name='username', required='', value='', placeholder='Username',ng-model="registration.username",ng-minlength="6")
+						div.has-error(ng-show="registrationForm.username.$dirty && registrationForm.username.$invalid")
+							p.help-block(ng-show="registrationForm.username.$error.required") Username is required
+							p.help-block(ng-show="registrationForm.username.$error.minlength") Username is too short
+					.form-group
+						label(for='email') Email
+						input#user_email.form-control(type='email', name='email', required='', value='', placeholder='Email',ng-model="registration.email")
+						div.has-error(ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid")
+							p.help-block(ng-show="registrationForm.email.$error.required") Email is required
+							p.help-block(ng-show="registrationForm.email.$error.email") Invalid Email
+					.form-group
+						label(for='password') Password
+						input#user_password.form-control(type='password', required='', value='', name='password', placeholder='Password',ng-model="registration.password",ng-minlength="6")
+						div.has-error(ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid")
+							p.help-block(ng-show="registrationForm.password.$error.required") Password is required
+							p.help-block(ng-show="registrationForm.password.$error.minlength") Password is too short
+					.form-group
+						label(for='retype_password') Retype password
+						input#cuser_password.form-control(type='password', required='', value='', name='retype_password', placeholder='Retype password',ng-model="registration.retype_password",compare-to="registration.password")
+						div.has-error(ng-show="registrationForm.retype_password.$dirty && registrationForm.retype_password.$invalid")
+							p.help-block(ng-show="registrationForm.retype_password.$error.required") Password is required
+							p.help-block(ng-show="registrationForm.retype_password.$error.compareTo") Passwords don't match
+
+				.modal-footer
+					span.user-login-modal-link.pull-left
+						a(data-rel='loginModal', href='#loginModal') Already have an account?
+					input.btn.btn-default.btn-outline(type="submit",ng-disabled="registrationForm.$invalid",value="Register")
