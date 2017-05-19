@@ -4,6 +4,7 @@ var url = require('url');
 var Product = require('../../models/product');
 var Category = require('../../models/category');
 var Brand = require('../../models/brand');
+var User = require('../../models/user');
 
 //get all the products
 router.route('/products').get(function(req, res) {
@@ -139,6 +140,24 @@ router.route('/product/brands').get(function(req, res) {
         }
         res.json(categories);
       });
+  });
+});
+
+//User registration
+router.route('/user/register').post(function(req, res) {
+  var user = new User();
+  user.username = req.body.username;
+  user.password = req.body.password;
+  user.email = req.body.email;
+  user.name = req.body.name;
+
+  user.save(function(err) {
+    if (err) {
+        res.status(400);
+        return res.json(err.errors);
+    } else {
+      return res.json({status:"success"});
+    }
   });
 });
 

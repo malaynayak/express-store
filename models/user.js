@@ -19,6 +19,7 @@ var UserSchema = new Schema({
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   role: { type: String, default: 'Customer' },
+  token: { type: String}
 });
 
 var validatePresenceOf = function(value){
@@ -28,7 +29,6 @@ var validatePresenceOf = function(value){
 /**
  * Virtuals
  */
-
 UserSchema
   .virtual('password')
   .set(function (password) {
@@ -44,7 +44,7 @@ UserSchema
  * Validations
  */
 
-// the below validations only apply if you are signing up traditionally
+// Validate email is unique
 UserSchema.path('email').validate(function (email, fn) {
   var User = mongoose.model('User');
   // Check only when it is a new user or when email field is modified
@@ -54,6 +54,17 @@ UserSchema.path('email').validate(function (email, fn) {
     });
   } else fn(true);
 }, 'Email already exists');
+
+// Validate username is unique
+UserSchema.path('username').validate(function (username, fn) {
+  var User = mongoose.model('User');
+  // Check only when it is a new user or when email field is modified
+  if (this.isNew || this.isModified('username')) {
+    User.find({ username: username }).exec(function (err, users) {
+      fn(!err && users.length === 0);
+    });
+  } else fn(true);
+}, 'Username already exists');
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
   return hashed_password.length && this._password.length;

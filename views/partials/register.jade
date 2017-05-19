@@ -1,13 +1,18 @@
 #userregisterModal.modal.fade.user-register-modal(tabindex='-1', role='dialog', aria-hidden='true')
 	.modal-dialog
 		.modal-content
-			form#userregisterModalForm(name="registrationForm",novalidate="",ng-submit="submitRegistrationForm()")
+			form#userregisterModalForm(name="registrationForm",novalidate="",ng-submit="submitRegistrationForm($event)")
 				.modal-header
 					button.close(type='button', data-dismiss='modal')
 						span(aria-hidden='true') ×
 						span.sr-only Close
 					h4.modal-title Register
 				.modal-body
+					.form-group
+						label(for='name') Name
+						input.form-control(type='text', name='name', required='', value='', placeholder='Name',ng-model="registration.name")
+						div.has-error(ng-show="registrationForm.name.$dirty && registrationForm.name.$invalid")
+							p.help-block(ng-show="registrationForm.name.$error.required") Name is required
 					.form-group
 						label(for='username') Username
 						input.form-control(type='text', name='username', required='', value='', placeholder='Username',ng-model="registration.username",ng-minlength="6")

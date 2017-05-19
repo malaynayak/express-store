@@ -1,4 +1,4 @@
-angular.module('App.controllers.Main', []) 
+angular.module('App.controllers.Main', ['App.services.Auth']) 
 .directive("compareTo", function() {
     return {
         require: "ngModel",
@@ -12,8 +12,8 @@ angular.module('App.controllers.Main', [])
         }
     };
 })
-.controller('MainController', ["$rootScope", "$scope", "$location", 
-	function($rootScope, $scope, $location){
+.controller('MainController', ["$rootScope", "$scope", "$location","AuthService",
+	function($rootScope, $scope, $location,AuthService){
 		$rootScope.isShopPage = false;
 		$rootScope.$on('$routeChangeSuccess', function(scope, current, pre) {
 	      	var baseRoute = $location.path().split("/")[1];
@@ -28,6 +28,7 @@ angular.module('App.controllers.Main', [])
 	    }
 
 	    $scope.registration = {
+            name:'',
             username : '',
             email : '',
             password : '',
@@ -39,8 +40,15 @@ angular.module('App.controllers.Main', [])
             password : '',
         };
 
-        $scope.submitRegistrationForm = function(){
-        	alert("Submitted");
+        $scope.submitRegistrationForm = function(e){
+        	var promise = AuthService.registerUser($scope.registration);
+            promise.then(function(data){
+                if(data.status !== undefined && data.status !== 'success'){
+                    console.log("User registration successful");
+                }
+            },function(response){
+                console.log(response.data);
+            });
         }
 
         $scope.submitLoginForm = function(){

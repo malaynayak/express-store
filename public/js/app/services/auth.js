@@ -1,5 +1,5 @@
-angular.module('MyApp.services.Auth', [])
-.factory('AuthService', function () {
+angular.module('App.services.Auth', [])
+.factory('AuthService', function ($http) {
   var authService = {};
  
   authService.login = function (credentials) {
@@ -20,6 +20,10 @@ angular.module('MyApp.services.Auth', [])
   authService.logout = function () {
     sessionStorage.removeItem("logged");
   }
+
+  authService.registerUser = function (data) {
+    return $http.post("/api/user/register", data);
+  };
 
   return authService;
 });
