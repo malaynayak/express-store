@@ -15,16 +15,18 @@
 							p.help-block(ng-show="registrationForm.name.$error.required") Name is required
 					.form-group
 						label(for='username') Username
-						input.form-control(type='text', name='username', required='', value='', placeholder='Username',ng-model="registration.username",ng-minlength="6")
+						input.form-control(type='text', name='username', required='', value='', placeholder='Username',ng-model="registration.username",ng-minlength="6", unique="username")
 						div.has-error(ng-show="registrationForm.username.$dirty && registrationForm.username.$invalid")
 							p.help-block(ng-show="registrationForm.username.$error.required") Username is required
 							p.help-block(ng-show="registrationForm.username.$error.minlength") Username is too short
+							p.help-block(ng-show="registrationForm.username.$error.unique") Username is already in use
 					.form-group
 						label(for='email') Email
-						input#user_email.form-control(type='email', name='email', required='', value='', placeholder='Email',ng-model="registration.email")
+						input#user_email.form-control(type='email', name='email', required='', value='', placeholder='Email',ng-model="registration.email", unique="email")
 						div.has-error(ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid")
 							p.help-block(ng-show="registrationForm.email.$error.required") Email is required
 							p.help-block(ng-show="registrationForm.email.$error.email") Invalid Email
+							p.help-block(ng-show="registrationForm.email.$error.unique") Email is already in use
 					.form-group
 						label(for='password') Password
 						input#user_password.form-control(type='password', required='', value='', name='password', placeholder='Password',ng-model="registration.password",ng-minlength="6")

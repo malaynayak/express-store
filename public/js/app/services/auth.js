@@ -1,5 +1,5 @@
 angular.module('App.services.Auth', [])
-.factory('AuthService', function ($http) {
+.factory('AuthService', function ($http,$q) {
   var authService = {};
  
   authService.login = function (credentials) {
@@ -23,6 +23,11 @@ angular.module('App.services.Auth', [])
 
   authService.registerUser = function (data) {
     return $http.post("/api/user/register", data);
+  };
+
+  authService.checkUniqueValue = function (value,property) {
+    return $http.get("/api/user/check-unique"+ '?property=' + property + 
+              '&value=' + escape(value));
   };
 
   return authService;

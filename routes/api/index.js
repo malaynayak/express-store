@@ -161,6 +161,24 @@ router.route('/user/register').post(function(req, res) {
   });
 });
 
+
+//Check user email/username alredy in use
+router.route('/user/check-unique').get(function(req, res) {
+    var query = url.parse(req.url, true).query;
+    var property = query.property;
+    var value  = query.value;
+    var filter = {};
+    filter[property] = value;
+    User.find(filter).exec(function (err, users) {
+      if(!err && users.length === 0){
+        return res.send({unique:true});
+      } else {
+        return res.send({unique:false});
+      }
+    });
+});
+
+
 //catch 404 and forward to error handler
 router.use(function(req, res, next) {
   var err = new Error('Invalid Path');

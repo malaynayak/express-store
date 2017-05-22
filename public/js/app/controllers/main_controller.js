@@ -1,4 +1,5 @@
 angular.module('App.controllers.Main', ['App.services.Auth']) 
+
 .directive("compareTo", function() {
     return {
         require: "ngModel",
@@ -8,6 +9,37 @@ angular.module('App.controllers.Main', ['App.services.Auth'])
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.compareTo = function(modelValue) {
                 return modelValue == scope.comparingModel;
+            };
+        }
+    };
+})
+
+.directive("unique", function($q,AuthService) {
+    return {
+        require: "ngModel",
+        scope: {
+            unique: "@"
+        },
+        link: function(scope, element, attrs, ngModel) {
+            ngModel.$asyncValidators.unique = function (modelValue, viewValue) {
+                var deferred = $q.defer(),
+                    currentValue = modelValue || viewValue,
+                    property = scope.unique;
+                if (property) {
+                    AuthService.checkUniqueValue(currentValue, property)
+                    .then(function (response) {
+                        if (response.data.unique !== undefined
+                         && response.data.unique) {
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                        }
+                    });
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
             };
         }
     };
